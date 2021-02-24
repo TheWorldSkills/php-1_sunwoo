@@ -3,6 +3,7 @@
         alert("회원만 접근 가능합니다.");
     }
 ?>
+
     <!-- contents -->
     <section id="contents">
         <div class="container">
@@ -68,7 +69,7 @@
                                                             $list = $pdo->query("select * from board where memberIdx='{$member->idx}'")->fetchAll();
                                                             foreach ($list as $key => $e) {
                                                         ?>
-                                                        <option value="<?= $e->idx ?>"><?= $e->boardName ?></option>
+                                                        <option <?= $e->idx == $v->boardId ? 'selected' : ''; ?> value="<?= $e->idx ?>"><?= $e->boardName ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </td>

@@ -59,4 +59,10 @@
         echo "</script>";
         exit;
     }
+
+    $user = $pdo->query("select * from member where id = '{$pagemode}'")->fetchAll();
+    if ($user) {
+        include "./page/myblog.php";
+        exit;
+    }
 ?>
