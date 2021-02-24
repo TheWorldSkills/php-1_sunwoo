@@ -1,4 +1,8 @@
-
+<?php
+    if (!$member) {
+        alert("회원만 접근 가능합니다.");
+    }
+?>
     
     <!-- contents -->
     <section id="contents">

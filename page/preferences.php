@@ -51,7 +51,6 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                                print_r($member->id);
                                                 $list = $pdo->query("select * from menu where memberIdx='{$member->idx}'")->fetchAll();
                                                 foreach ($list as $key => $v) {
                                             ?>
@@ -64,14 +63,17 @@
                                                 </td>
                                                 <td>
                                                     <select class="form-control input-sm">
-                                                        <option>선택</option>
-                                                        <option>board3</option>
-                                                        <option>board2</option>
-                                                        <option>board1</option>
+                                                        <option value=" ">선택</option>
+                                                        <?php 
+                                                            $list = $pdo->query("select * from board where memberIdx='{$member->idx}'")->fetchAll();
+                                                            foreach ($list as $key => $e) {
+                                                        ?>
+                                                        <option value="<?= $e->idx ?>"><?= $e->boardName ?></option>
+                                                        <?php } ?>
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-default btn-xs" type="button">게시판등록</button>
+                                                    <button class="btn btn-default btn-xs on_click" type="button" data-idx="<?= $v->idx ?>">게시판등록</button>
                                                     <button class="btn btn-default btn-xs" type="button">메뉴삭제</button>
                                                 </td>
                                             </tr>
@@ -89,7 +91,7 @@
                                         <label>게시판아이디
                                             <span class="color-red">*</span>
                                         </label>
-                                        <input class="form-control margin-bottom-20" type="text">
+                                        <input class="form-control margin-bottom-20" type="text" name="boardId">
                                         <div class="col-lg-12 text-right">
                                             <button class="btn btn-primary btn-sm" type="submit">게시판등록</button>
                                         </div>
@@ -115,39 +117,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                                $list = $pdo->query("select * from board where memberIdx='{$member->idx}'")->fetchAll();
+                                                foreach ($list as $key => $v) {
+                                            ?>
                                             <tr>
                                                 <td>
-                                                    3
+                                                    <?= $key ?>
                                                 </td>
                                                 <td>
-                                                    board3
+                                                    <?= $v->boardId ?>
                                                 </td>                                                
                                                 <td>
                                                     <button class="btn btn-default btn-xs" type="button">게시판삭제</button>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    board2
-                                                </td>                                                
-                                                <td>
-                                                    <button class="btn btn-default btn-xs" type="button">게시판삭제</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-                                                    board1
-                                                </td>                                                
-                                                <td>
-                                                    <button class="btn btn-default btn-xs" type="button">게시판삭제</button>
-                                                </td>
-                                            </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>

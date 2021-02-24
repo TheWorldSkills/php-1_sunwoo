@@ -22,5 +22,10 @@
             alert("등록이 되었습니다.", '/page/preferences/');
 
             break;
+        case 'menu_chk':
+            print_r($_POST);
+            $pdo->query("update menu set boardId = '{$_POST['board_idx']}' where idx = '{$_POST['menu_idx']}'");
+            break;
+
     }
 ?>
